@@ -3,8 +3,8 @@ FROM ubuntu:18.04
 
 
 # Up to date
-RUN apt-get update && apt-get install -y curl
-
+RUN apt-get update && apt-get install -y curl python2.7 git
+RUN ln -s /usr/bin/python2.7 /usr/bin/python2
 
 ENV ATOLLIC_URL http://download.atollic.com/TrueSTUDIO/installers/Atollic_TrueSTUDIO_for_STM32_linux_x86_64_v9.3.0_20190212-0734.tar.gz
 # Download truestudio
@@ -29,7 +29,7 @@ RUN installPath=${TRUESTUDIO_INSTALL_PATH} && \
 
 # install in the second RUN
 RUN echo 'Unpack and install truestudio' && \
-  f=$(basename ${TRUESTUDIO_URL}) && \
+  f=$(basename ${ATOLLIC_URL}) && \
   tar xzfvp $f && \
   installPath=${TRUESTUDIO_INSTALL_PATH} && \
   scriptPath=$(basename ${TRUESTUDIO_INSTALL_PATH})_installer && \
